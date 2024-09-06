@@ -7,26 +7,24 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table
+@Table(name = "utente")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-
 public class Utente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
-    private String nome;
-    private String cognome;
+    private String nomeCompleto;
     private String email;
 
-    public Utente(String username, String nome, String cognome, String email) {
+    public Utente(String username, String nomeCompleto, String email) {
         this.username = username;
-        this.nome = nome;
-        this.cognome = cognome;
+        this.nomeCompleto = nomeCompleto;
         this.email = email;
     }
 
@@ -46,20 +44,12 @@ public class Utente {
         this.username = username;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public String getEmail() {

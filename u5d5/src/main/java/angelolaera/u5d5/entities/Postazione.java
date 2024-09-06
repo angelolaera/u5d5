@@ -8,21 +8,22 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="postazione")
+@Table(name = "postazione")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-
 public class Postazione {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String codice;
     private String descrizione;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_postazione")
     private TipoPostazione tipoPostazione;
 
     private int numeroMassimoOccupanti;

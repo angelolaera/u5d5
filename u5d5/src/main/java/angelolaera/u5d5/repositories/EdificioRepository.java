@@ -5,7 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
+public interface EdificioRepository extends JpaRepository<Edificio, Long> {
 
-public interface EdificioRepository  extends JpaRepository <Edificio,Long> {
-
+    // Trova un edificio per città
+    Edificio findByCitta(String citta);
 }

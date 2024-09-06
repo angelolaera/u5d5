@@ -9,13 +9,11 @@ import lombok.ToString;
 import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(name = "prenotazione")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-
-
 public class Prenotazione {
 
     @Id

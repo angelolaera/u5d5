@@ -1,11 +1,9 @@
 package angelolaera.u5d5.service;
 
-import angelolaera.u5d5.entities.Postazione;
 import angelolaera.u5d5.entities.Prenotazione;
+import angelolaera.u5d5.entities.Postazione;
 import angelolaera.u5d5.entities.Utente;
-import angelolaera.u5d5.repositories.PostazioneRepository;
 import angelolaera.u5d5.repositories.PrenotazioneRepository;
-import angelolaera.u5d5.repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,45 +12,52 @@ import java.util.List;
 
 @Service
 public class PrenotazioneService {
+
     @Autowired
     private PrenotazioneRepository prenotazioneRepository;
 
-    @Autowired
-    private PostazioneRepository postazioneRepository;
-
-    @Autowired
-    private UtenteRepository utenteRepository;
-
-    public Prenotazione prenotaPostazione(Long postazioneId, Long utenteId, LocalDate data) {
-        Postazione postazione = postazioneRepository.findById(postazioneId).orElseThrow(() -> new RuntimeException("Postazione non trovata"));
-        Utente utente = utenteRepository.findById(utenteId).orElseThrow(() -> new RuntimeException("Utente non trovato"));
-
-        if (!prenotazioneRepository.findByPostazioneAndData(postazione, data).isEmpty()) {
-            throw new RuntimeException("Postazione già prenotata per la data specificata");
-        }
-
-        if (!prenotazioneRepository.findByUtenteAndData(utente, data).isEmpty()) {
-            throw new RuntimeException("L'utente ha già una prenotazione per la data specificata");
-        }
-
-        Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setPostazione(postazione);
-        prenotazione.setUtente(utente);
-        prenotazione.setData(data);
+    // Crea una nuova prenotazione
+    public Prenotazione creaPrenotazione(Prenotazione prenotazione) {
         return prenotazioneRepository.save(prenotazione);
     }
 
+    // Recupera tutte le prenotazioni
     public List<Prenotazione> trovaTuttePrenotazioni() {
         return prenotazioneRepository.findAll();
     }
 
-    public List<Prenotazione> trovaPrenotazioniPerUtente(Long utenteId) {
-        Utente utente = utenteRepository.findById(utenteId).orElseThrow(() -> new RuntimeException("Utente non trovato"));
-        return prenotazioneRepository.findByUtente(utente);
+    // Trova prenotazioni per utente e data
+    public List<Prenotazione> trovaPrenotazioniPerUtenteEData(Utente utente, LocalDate data) {
+        return prenotazioneRepository.findByUtenteAndData(utente, data);
     }
 
-    public void cancellaPrenotazione(Long prenotazioneId) {
-        prenotazioneRepository.deleteById(prenotazioneId);
+    // Trova prenotazioni per postazione e data
+    public List<Prenotazione> trovaPrenotazioniPerPostazioneEData(Postazione postazione, LocalDate data) {
+        return prenotazioneRepository.findByPostazioneAndData(postazione, data);
+    }
+
+    // Trova prenotazioni per postazione
+    public List<Prenotazione> trovaPrenotazioniPerPostazione(Postazione postazione) {
+        return prenotazioneRepository.findByPostazione(postazione);
+    }
+
+    // Trova una prenotazione per ID
+    public Prenotazione trovaPrenotazionePerId(Long id) {
+        return prenotazioneRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Prenotazione non trovata"));
+    }
+
+    // Aggiorna una prenotazione
+    public Prenotazione aggiornaPrenotazione(Long id, Prenotazione prenotazioneAggiornata) {
+        Prenotazione prenotazione = trovaPrenotazionePerId(id);
+        prenotazione.setPostazione(prenotazioneAggiornata.getPostazione());
+        prenotazione.setUtente(prenotazioneAggiornata.getUtente());
+        prenotazione.setData(prenotazioneAggiornata.getData());
+        return prenotazioneRepository.save(prenotazione);
+    }
+
+    // Elimina una prenotazione
+    public void eliminaPrenotazione(Long id) {
+        prenotazioneRepository.deleteById(id);
     }
 }
-

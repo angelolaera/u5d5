@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+public interface PostazioneRepository extends JpaRepository<Postazione, Long> {
 
-public interface PostazioneRepository extends JpaRepository <Postazione,Long> {
-    List<Postazione> findByTipoAndEdificioCittà(String tipo, String citta);
+    List<Postazione> findByTipoPostazioneAndEdificio_Citta(String tipoPostazione, String citta);
+    Postazione findByCodice(String codice);
 }

@@ -7,16 +7,17 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="edificio")
-@NoArgsConstructor
+@Table(name = "edificio")
 @Getter
 @Setter
 @ToString
-
+@NoArgsConstructor
 public class Edificio {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
     private String indirizzo;
     private String citta;
@@ -25,6 +26,14 @@ public class Edificio {
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.citta = citta;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {

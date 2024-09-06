@@ -4,12 +4,12 @@ import angelolaera.u5d5.entities.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
+public interface UtenteRepository extends JpaRepository<Utente, Long> {
 
-public interface UtenteRepository extends JpaRepository <Utente,Long> {
+    // Trova un utente per username
+    Utente findByUsername(String username);
 
-    Optional<Utente> findByUsername(String username);
-
+    // Trova un utente per email
+    Utente findByEmail(String email);
 }

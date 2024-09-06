@@ -9,35 +9,48 @@ import java.util.List;
 
 @Service
 public class UtenteService {
+
     @Autowired
     private UtenteRepository utenteRepository;
 
+    // Crea un nuovo utente
     public Utente creaUtente(Utente utente) {
         return utenteRepository.save(utente);
     }
 
+    // Recupera tutti gli utenti
     public List<Utente> trovaTuttiUtenti() {
         return utenteRepository.findAll();
     }
 
-    public Utente trovaUtentePerUsername(String username) {
-        return utenteRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Utente non trovato"));
-    }
-
+    // Trova un utente per ID
     public Utente trovaUtentePerId(Long id) {
-        return utenteRepository.findById(id).orElseThrow(() -> new RuntimeException("Utente non trovato"));
+        return utenteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Utente non trovato"));
     }
 
+    // Trova un utente per username
+    public Utente trovaUtentePerUsername(String username) {
+        return utenteRepository.findByUsername(username);
+    }
+
+    // Trova un utente per email
+    public Utente trovaUtentePerEmail(String email) {
+        return utenteRepository.findByEmail(email);
+    }
+
+    // Aggiorna un utente
     public Utente aggiornaUtente(Long id, Utente utenteAggiornato) {
         Utente utente = trovaUtentePerId(id);
+        utente.setUsername(utenteAggiornato.getUsername());
+        utente.setEmail(utenteAggiornato.getEmail());
         utente.setNome(utenteAggiornato.getNome());
         utente.setCognome(utenteAggiornato.getCognome());
-        utente.setEmail(utenteAggiornato.getEmail());
         return utenteRepository.save(utente);
     }
 
+    // Elimina un utente
     public void eliminaUtente(Long id) {
         utenteRepository.deleteById(id);
     }
 }
-

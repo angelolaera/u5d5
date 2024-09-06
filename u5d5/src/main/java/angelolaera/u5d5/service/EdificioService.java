@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class EdificioService {
 
     @Autowired
     private EdificioRepository edificioRepository;
 
-    public Edificio creaEdificio(Edificio edificio){
+    public Edificio creaEdificio(Edificio edificio) {
         return edificioRepository.save(edificio);
     }
 
@@ -23,7 +22,12 @@ public class EdificioService {
     }
 
     public Edificio trovaEdificioPerId(Long id) {
-        return edificioRepository.findById(id).orElseThrow(() -> new RuntimeException("Edificio non trovato"));
+        return edificioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Edificio non trovato"));
+    }
+
+    public Edificio trovaEdificioPerCitta(String citta) {
+        return edificioRepository.findByCitta(citta);
     }
 
     public Edificio aggiornaEdificio(Long id, Edificio edificioAggiornato) {
@@ -34,4 +38,7 @@ public class EdificioService {
         return edificioRepository.save(edificio);
     }
 
+    public void eliminaEdificio(Long id) {
+        edificioRepository.deleteById(id);
+    }
 }
