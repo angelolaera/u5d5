@@ -48,5 +48,6 @@ public class PrenotazioniRunner implements CommandLineRunner {
 
         List<Prenotazione> prenotazioni = prenotazioneService.trovaPrenotazioniPerUtenteEData(angelo, LocalDate.now());
         System.out.println("Prenotazioni trovate per utente e data: " + prenotazioni);
+
     }
 }
