@@ -16,38 +16,30 @@ public class PrenotazioneService {
     @Autowired
     private PrenotazioneRepository prenotazioneRepository;
 
-    // Crea una nuova prenotazione
     public Prenotazione creaPrenotazione(Prenotazione prenotazione) {
         return prenotazioneRepository.save(prenotazione);
     }
 
-    // Recupera tutte le prenotazioni
     public List<Prenotazione> trovaTuttePrenotazioni() {
         return prenotazioneRepository.findAll();
     }
 
-    // Trova prenotazioni per utente e data
     public List<Prenotazione> trovaPrenotazioniPerUtenteEData(Utente utente, LocalDate data) {
         return prenotazioneRepository.findByUtenteAndData(utente, data);
     }
 
-    // Trova prenotazioni per postazione e data
     public List<Prenotazione> trovaPrenotazioniPerPostazioneEData(Postazione postazione, LocalDate data) {
         return prenotazioneRepository.findByPostazioneAndData(postazione, data);
     }
 
-    // Trova prenotazioni per postazione
     public List<Prenotazione> trovaPrenotazioniPerPostazione(Postazione postazione) {
         return prenotazioneRepository.findByPostazione(postazione);
     }
 
-    // Trova una prenotazione per ID
     public Prenotazione trovaPrenotazionePerId(Long id) {
-        return prenotazioneRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Prenotazione non trovata"));
+        return prenotazioneRepository.findById(id).orElseThrow(() -> new RuntimeException("Prenotazione non trovata"));
     }
 
-    // Aggiorna una prenotazione
     public Prenotazione aggiornaPrenotazione(Long id, Prenotazione prenotazioneAggiornata) {
         Prenotazione prenotazione = trovaPrenotazionePerId(id);
         prenotazione.setPostazione(prenotazioneAggiornata.getPostazione());
@@ -56,7 +48,6 @@ public class PrenotazioneService {
         return prenotazioneRepository.save(prenotazione);
     }
 
-    // Elimina una prenotazione
     public void eliminaPrenotazione(Long id) {
         prenotazioneRepository.deleteById(id);
     }

@@ -19,12 +19,14 @@ public class Utente {
     private Long id;
 
     private String username;
-    private String nomeCompleto;
+    private String nome;
+    private String cognome;
     private String email;
 
-    public Utente(String username, String nomeCompleto, String email) {
+    public Utente(String username, String nome, String cognome, String email) {
         this.username = username;
-        this.nomeCompleto = nomeCompleto;
+        this.nome = nome;
+        this.cognome = cognome;
         this.email = email;
     }
 
@@ -44,12 +46,20 @@ public class Utente {
         this.username = username;
     }
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 
     public String getEmail() {

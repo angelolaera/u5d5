@@ -30,12 +30,15 @@ public class Prenotazione {
 
     private LocalDate data;
 
-    public Long getId() {
-        return id;
+
+    public Prenotazione(Postazione postazione, Utente utente, LocalDate data) {
+        this.postazione = postazione;
+        this.utente = utente;
+        this.data = data;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public Postazione getPostazione() {
@@ -61,4 +64,6 @@ public class Prenotazione {
     public void setData(LocalDate data) {
         this.data = data;
     }
+
+
 }

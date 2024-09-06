@@ -18,9 +18,7 @@ public class PostazioneService {
     @Autowired
     private EdificioRepository edificioRepository;
 
-    public Postazione creaPostazione(Postazione postazione, Long edificioId) {
-        Edificio edificio = edificioRepository.findById(edificioId).orElseThrow(() -> new RuntimeException("Edificio non trovato"));
-        postazione.setEdificio(edificio);
+    public Postazione creaPostazione(Postazione postazione) {
         return postazioneRepository.save(postazione);
     }
 
@@ -39,13 +37,12 @@ public class PostazioneService {
 
     public Postazione aggiornaPostazione(Long id, Postazione postazioneAggiornata) {
         Postazione postazione = trovaPostazionePerId(id);
-        postazione.setCodice(postazioneAggiornata.getCodice());
         postazione.setDescrizione(postazioneAggiornata.getDescrizione());
         postazione.setTipoPostazione(postazioneAggiornata.getTipoPostazione());
         postazione.setNumeroMassimoOccupanti(postazioneAggiornata.getNumeroMassimoOccupanti());
         return postazioneRepository.save(postazione);
     }
-    
+
     public void eliminaPostazione(Long id) {
         postazioneRepository.deleteById(id);
     }

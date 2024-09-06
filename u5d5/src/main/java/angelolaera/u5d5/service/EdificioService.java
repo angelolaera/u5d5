@@ -13,6 +13,8 @@ public class EdificioService {
     @Autowired
     private EdificioRepository edificioRepository;
 
+
+
     public Edificio creaEdificio(Edificio edificio) {
         return edificioRepository.save(edificio);
     }
@@ -22,8 +24,7 @@ public class EdificioService {
     }
 
     public Edificio trovaEdificioPerId(Long id) {
-        return edificioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Edificio non trovato"));
+        return edificioRepository.findById(id).orElseThrow(() -> new RuntimeException("Edificio non trovato"));
     }
 
     public Edificio trovaEdificioPerCitta(String citta) {
