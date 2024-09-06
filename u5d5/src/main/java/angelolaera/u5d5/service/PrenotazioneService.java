@@ -42,18 +42,15 @@ public class PrenotazioneService {
         return prenotazioneRepository.save(prenotazione);
     }
 
-    // Recupera tutte le prenotazioni
     public List<Prenotazione> trovaTuttePrenotazioni() {
         return prenotazioneRepository.findAll();
     }
 
-    // Trova prenotazioni per utente
     public List<Prenotazione> trovaPrenotazioniPerUtente(Long utenteId) {
         Utente utente = utenteRepository.findById(utenteId).orElseThrow(() -> new RuntimeException("Utente non trovato"));
-        return prenotazioneRepository.findByUtenteAndData(utente,data);
+        return prenotazioneRepository.findByUtente(utente);
     }
 
-    // Cancella una prenotazione
     public void cancellaPrenotazione(Long prenotazioneId) {
         prenotazioneRepository.deleteById(prenotazioneId);
     }
