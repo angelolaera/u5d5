@@ -38,4 +38,52 @@ public class Postazione {
         this.numeroMassimoOccupanti = numeroMassimoOccupanti;
         this.edificio = edificio;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCodice() {
+        return codice;
+    }
+
+    public void setCodice(String codice) {
+        this.codice = codice;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public TipoPostazione getTipoPostazione() {
+        return tipoPostazione;
+    }
+
+    public void setTipoPostazione(TipoPostazione tipoPostazione) {
+        this.tipoPostazione = tipoPostazione;
+    }
+
+    public int getNumeroMassimoOccupanti() {
+        return numeroMassimoOccupanti;
+    }
+
+    public void setNumeroMassimoOccupanti(int numeroMassimoOccupanti) {
+        this.numeroMassimoOccupanti = numeroMassimoOccupanti;
+    }
+
+    public Edificio getEdificio() {
+        return edificio;
+    }
+
+    public void setEdificio(Edificio edificio) {
+        this.edificio = edificio;
+    }
 }
